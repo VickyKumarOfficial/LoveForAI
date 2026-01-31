@@ -16,7 +16,7 @@ export const SPEAKERS: Speaker[] = [
     role: 'Senior DevOps Specialist',
     company: 'Equisoft',
     companyUrl: 'https://www.equisoft.com/',
-    image: '/assets/shahar.png',
+    image: '/assets/shahar.webp',
     bio: 'AWS Cloud Engineer and DevOps expert with 12+ years of experience & keynote speaker.',
     linkedin: 'https://www.linkedin.com/in/shaharbanu/'
   },
@@ -26,7 +26,7 @@ export const SPEAKERS: Speaker[] = [
     role: 'CTO',
     company: 'Aruze Gaming Global',
     companyUrl: 'https://aruzeglobal.com/',
-    image: '/assets/srini.jpeg',
+    image: '/assets/srini.webp',
     bio: 'Global gaming tech executive and patent-holding systems strategist.',
     linkedin: 'https://www.linkedin.com/in/sriniadiraju/'
   },
@@ -36,7 +36,7 @@ export const SPEAKERS: Speaker[] = [
     role: 'CEO',
     companyUrl: 'https://resolutegoc.com/',
     company: 'Resolute IP Services LLP',
-    image: '/assets/subhajit.jpeg',
+    image: '/assets/subhajit.webp',
     bio: 'A veteran IP strategist and Patent Agent with 22+ years of global expertise.',
     linkedin: 'https://www.linkedin.com/in/subhajit-saha-a9961518/'
   },
@@ -46,7 +46,7 @@ export const SPEAKERS: Speaker[] = [
     role: 'Lead scrum master',
     companyUrl: 'https://www.wellsfargo.com/',
     company: 'Wells Fargo',
-    image: '/assets/suryaprakash.JPG',
+    image: '/assets/suryaprakash.webp',
     bio: 'An well experienced in the Software Eng. and Automation field',
     linkedin: 'https://www.linkedin.com/in/suryaprakash-i-34305921?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
   }
