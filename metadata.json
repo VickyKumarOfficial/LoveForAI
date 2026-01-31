@@ -1,0 +1,8 @@
+{
+  "name": "LoveForAi Conference 2026",
+  "description": "A high-end, minimalistic conference landing page for LoveForAi, a premier AI event held on Feb 14, 2026.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
