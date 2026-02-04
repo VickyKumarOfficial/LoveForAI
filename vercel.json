@@ -2,6 +2,13 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "build": {
+    "env": {
+      "VITE_SUPABASE_URL": "@vite_supabase_url",
+      "VITE_SUPABASE_ANON_KEY": "@vite_supabase_anon_key",
+      "VITE_RAZORPAY_KEY_ID": "@vite_razorpay_key_id"
+    }
+  },
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -18,10 +25,5 @@
       "source": "/((?!assets|.*\\..*).*)",
       "destination": "/index.html"
     }
-  ],
-  "env": {
-    "VITE_SUPABASE_URL": "@vite_supabase_url",
-    "VITE_SUPABASE_ANON_KEY": "@vite_supabase_anon_key",
-    "VITE_RAZORPAY_KEY_ID": "@vite_razorpay_key_id"
-  }
+  ]
 }
