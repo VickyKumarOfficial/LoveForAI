@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+// Pricing plans configuration - Free plan commented out for production
 const plans = [
   // {
   //   title: "Early Bird",
