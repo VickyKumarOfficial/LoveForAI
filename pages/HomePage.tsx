@@ -3,8 +3,8 @@ import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
 import { SpeakerGrid } from '../components/SpeakerGrid';
 import { Agenda } from '../components/Agenda';
-import { Waitlist } from '../components/Waitlist';
-import { Footer } from '../components/Footer';
+// import { Waitlist } from '../components/Waitlist';
+import { Footer } from '../components/Footer' ;
 import { DeviceIntro } from '../components/DeviceIntro';
 import { SmoothScroll } from '../components/SmoothScroll';
 import { CustomCursor } from '../components/CustomCursor';
@@ -93,7 +93,7 @@ const HomePage: React.FC = () => {
               <div className="md:w-1/2">
                 <h2 className="text-5xl font-display font-black mb-6 uppercase leading-tight tracking-tighter">Hosted at the <br/><span className="text-brand-crimson">Heart of Innovation</span></h2>
                 <p className="text-zinc-600 mb-8 font-medium">
-                  We've secured the college's state-of-the-art Main Auditorium, equipped with surround sound and high-fidelity projection for an immersive keynote experience.
+                  We've secured the college, equipped with surround sound and high-fidelity projection for an immersive keynote experience.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-center gap-4 p-4 border border-zinc-200 rounded-xl hover:border-brand-crimson transition-colors">
@@ -111,7 +111,7 @@ const HomePage: React.FC = () => {
                     </div>
                     <div>
                       <h5 className="font-bold uppercase text-xs">When</h5>
-                      <p className="text-sm text-zinc-500">Feb 14, 2026 @ 09:00 AM SHARP</p>
+                      <p className="text-sm text-zinc-500">Feb 13 - 14, 2026 @ 09:00 AM SHARP</p>
                     </div>
                   </div>
                 </div>
@@ -131,7 +131,7 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
-        <Waitlist />
+        {/* <Waitlist /> */}
       </main>
 
       <Footer />

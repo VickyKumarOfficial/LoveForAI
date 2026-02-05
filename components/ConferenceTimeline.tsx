@@ -150,7 +150,7 @@ export function ConferenceTimeline() {
             Exploring modern game development techniques and tools.
           </p>
           <p className="text-xs text-white/60 md:text-sm">
-            [Inside today's game dev tools - with Mr. Srinit Adiraju]
+            [Inside today's game dev tools - with Mr. Srini Adiraju]
           </p>
         </div>
       ),
@@ -165,7 +165,7 @@ export function ConferenceTimeline() {
             Advanced AI agents and their applications powered by NVIDIA technology.
           </p>
           <p className="text-xs text-white/60 md:text-sm">
-            [Curated by Dr. Arcilla Gupta]
+            [Curated by Dr. Arpita Gupta]
           </p>
         </div>
       ),

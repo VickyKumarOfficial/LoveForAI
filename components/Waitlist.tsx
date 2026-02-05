@@ -30,7 +30,7 @@ export const Waitlist: React.FC = () => {
               transition={{ duration: 0.6 }}
               className="text-4xl md:text-6xl font-display font-black text-white mb-6"
             >
-              SECURE YOUR SEAT
+              JOIN THE WAITLIST
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}

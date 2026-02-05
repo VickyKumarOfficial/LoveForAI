@@ -14,9 +14,12 @@ export const Footer: React.FC = () => {
       >
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div>
-            <a href="#" className="text-2xl font-display font-extrabold tracking-tighter flex items-center gap-2 mb-4">
-              <span className="text-brand-crimson">Love</span>
-              <span className="text-white">ForAi</span>
+            <a href="#" className="flex items-center gap-2 mb-4">
+              <img 
+                src="/assets/Logo.webp" 
+                alt="LoveForAi" 
+                className="h-14 w-auto"
+              />
             </a>
             <p className="text-white/30 text-xs max-w-xs">
               The premier campus conference dedicated to the intersection of artificial intelligence and human passion.
@@ -37,7 +40,7 @@ export const Footer: React.FC = () => {
               <ul className="space-y-2 text-xs text-white/40">
                 <li><a href="#" className="hover:text-white transition-colors">Twitter (X)</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
+                <li><a href="https://www.instagram.com/loveforai_2k26?igsh=ZmlnbHBsZWRwNGZn" className="hover:text-white transition-colors">Instagram</a></li>
               </ul>
             </div>
           </div>

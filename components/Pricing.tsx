@@ -26,7 +26,6 @@ const plans = [
       "Priority seating",
       "Digital certificate",
       "Access to speaker meet & greet",
-      "Exclusive Discord community",
     ],
     icon: "🎯",
     popular: true,

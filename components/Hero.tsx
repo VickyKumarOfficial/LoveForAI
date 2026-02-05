@@ -65,7 +65,7 @@ export const Hero: React.FC = () => {
         </div>
         
         <p className="max-w-2xl mx-auto text-lg md:text-xl text-white/50 mb-12 font-light leading-relaxed">
-          Join the brightest minds in tech for a one-day immersion into the future of Artificial Intelligence. Experience the perfect synergy of human emotion and machine logic.
+          Join the brightest minds in tech for a two-day immersion into the future of Artificial Intelligence. Experience the perfect synergy of human emotion and machine logic.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
