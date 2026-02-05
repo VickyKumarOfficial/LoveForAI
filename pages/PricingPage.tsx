@@ -8,16 +8,16 @@ import { CustomCursor } from '../components/CustomCursor';
 import { SmoothScroll } from '../components/SmoothScroll';
 
 const plans = [
-  {
-    title: "Basic Pass",
-    price: "Free",
-    description: "Limited accessibility",
-    features: [
-      "Access to stalls",
-    ],
-    icon: "",
-    popular: false,
-  },
+  // {
+  //   title: "Basic Pass",
+  //   price: "Free",
+  //   description: "Limited accessibility",
+  //   features: [
+  //     "Access to stalls",
+  //   ],
+  //   icon: "",
+  //   popular: false,
+  // },
   {
     title: "Standard Pass",
     price: "₹99",
