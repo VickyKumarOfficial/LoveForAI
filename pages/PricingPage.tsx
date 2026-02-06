@@ -145,13 +145,13 @@ const PricingPage = () => {
       // Show success message
       setShowSuccess(true);
       
-      // Close modal and reset after 3 seconds
+      // Close modal and reset after 15 seconds (give time to scan Telegram QR)
       setTimeout(() => {
         setShowSuccess(false);
         closeModal();
         setFormData({ name: '', email: '', phone: '', college: '', year: '', transactionId: '' });
         setPaymentStep('details');
-      }, 3000);
+      }, 15000);
       
     } catch (error: any) {
       console.error('Registration error:', error);
@@ -422,25 +422,64 @@ const PricingPage = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    className="absolute inset-0 z-30 flex items-center justify-center bg-zinc-900/95 backdrop-blur-sm"
+                    className="absolute inset-0 z-30 flex items-center justify-center bg-zinc-900/95 backdrop-blur-sm overflow-y-auto"
                   >
-                    <div className="text-center p-8">
+                    <div className="text-center p-6 sm:p-8 max-w-md mx-auto">
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                        className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center"
+                        className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center"
                       >
-                        <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-8 h-8 sm:w-10 sm:h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </motion.div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Success!</h3>
-                      <p className="text-zinc-400">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Success!</h3>
+                      <p className="text-sm sm:text-base text-zinc-400 mb-6">
                         {selectedPlan?.price === 'Free' 
                           ? 'Registration successful! Check your email for confirmation.'
                           : 'Payment details submitted! We will verify your transaction and confirm your registration shortly.'}
                       </p>
+                      
+                      {/* Telegram Group Join Section */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="mt-4 p-4 sm:p-6 bg-gradient-to-br from-brand-crimson/10 to-transparent border border-brand-crimson/30 rounded-2xl"
+                      >
+                        <div className="flex items-center justify-center gap-2 mb-3">
+                          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-brand-crimson" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                          </svg>
+                          <h4 className="text-base sm:text-lg font-bold text-white uppercase tracking-wide">Join Our Community</h4>
+                        </div>
+                        <p className="text-xs sm:text-sm text-zinc-400 mb-4">
+                          Scan the QR code or click the button below to join our Telegram group for the latest updates!
+                        </p>
+                        <div className="bg-white p-2 w-32 h-32 sm:w-40 sm:h-40 mx-auto rounded-xl mb-4">
+                          <img 
+                            src="/assets/telegramgrp.png" 
+                            alt="Telegram Group QR Code" 
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <a
+                          href="https://t.me/+mzc0ek8zAzs5ZTVl"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-brand-crimson hover:bg-brand-crimson/90 rounded-xl font-bold uppercase tracking-wider text-xs sm:text-sm transition-all shadow-lg shadow-brand-crimson/30"
+                        >
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                          </svg>
+                          Join Telegram Group
+                        </a>
+                        <p className="text-xs text-zinc-500 mt-3">
+                          This window will close automatically in a few seconds
+                        </p>
+                      </motion.div>
                     </div>
                   </motion.div>
                 )}
