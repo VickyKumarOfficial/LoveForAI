@@ -92,12 +92,28 @@ const PricingPage = () => {
     });
   };
 
+  const handleTransactionIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Only allow digits and limit to 12 characters
+    const value = e.target.value.replace(/\D/g, '').slice(0, 12);
+    setFormData({
+      ...formData,
+      transactionId: value
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // If it's a paid plan and we are still in details step, move to payment step
     if (selectedPlan.price !== 'Free' && paymentStep === 'details') {
       setPaymentStep('payment');
+      return;
+    }
+
+    // Validate UTR number is exactly 12 digits for paid plans
+    if (selectedPlan.price !== 'Free' && formData.transactionId.length !== 12) {
+      setErrorMessage('Please enter a valid 12-digit UTR number.');
+      setTimeout(() => setErrorMessage(''), 5000);
       return;
     }
 
@@ -151,7 +167,7 @@ const PricingPage = () => {
         closeModal();
         setFormData({ name: '', email: '', phone: '', college: '', year: '', transactionId: '' });
         setPaymentStep('details');
-      }, 15000);
+      }, 20000);
       
     } catch (error: any) {
       console.error('Registration error:', error);
@@ -657,13 +673,19 @@ const PricingPage = () => {
                         id="transactionId"
                         name="transactionId"
                         value={formData.transactionId}
-                        onChange={handleInputChange}
+                        onChange={handleTransactionIdChange}
                         required={selectedPlan?.price !== 'Free'}
+                        maxLength={12}
+                        pattern="[0-9]{12}"
+                        inputMode="numeric"
                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-brand-crimson transition-colors"
-                        placeholder="Enter 12-digit UPI Reference Number"
+                        placeholder="Enter 12-digit UTR number"
                       />
                       <p className="text-xs text-zinc-500 mt-2">
-                        * Please verify the UTR number before submitting. Incorrect details may lead to registration cancellation.
+                        UTR must be exactly 12 digits. You can find it in your payment app's (PhonePay) transaction history.
+                      </p>
+                      <p className="text-xs text-zinc-500 mt-1">
+                        * Incorrect UTR may lead to registration cancellation.
                       </p>
                     </div>
                   </div>
