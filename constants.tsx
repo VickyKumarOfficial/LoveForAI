@@ -52,6 +52,19 @@ export const SPEAKERS: Speaker[] = [
   }
 ];
 
+export const PANEL_MEMBERS: Speaker[] = [
+  {
+    id: 'p1',
+    name: 'Aditya Atluri',
+    role: 'Co-Founder',
+    company: 'Zensens AI',
+    companyUrl: 'https://www.zensens.ai',
+    image: '/assets/Aditya_Alturi.webp',
+    bio: 'Mental wellness AI platform. Expertise: Strategy, Innovation, Entrepreneurship, Startup founder, Venture capital',
+    linkedin: ''
+  }
+];
+
 export const SCHEDULE: Session[] = [
   {
     id: 's1',
