@@ -87,10 +87,11 @@ export const Workshops: React.FC = () => {
               <div className="bg-zinc-900/90 backdrop-blur-3xl p-8 md:p-12 rounded-[2.3rem] h-full flex flex-col items-center text-center">
                 {/* Image Container */}
                 <div className="relative mb-8 h-32 w-full flex items-center justify-center">
+                  <div className="absolute inset-0 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors duration-500" />
                   <motion.img 
                     src={workshop.image} 
                     alt={workshop.title}
-                    className="max-h-full max-w-[240px] object-contain group-hover:scale-110 transition-transform duration-500"
+                    className="relative z-10 max-h-full max-w-[240px] object-contain group-hover:scale-110 transition-transform duration-500 brightness-110 contrast-125 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                   />
                   {workshop.featured && (
                     <div className="absolute -top-4 -right-4 bg-brand-crimson text-white text-[10px] font-black uppercase px-4 py-2 rounded-full shadow-lg shadow-brand-crimson/50">
