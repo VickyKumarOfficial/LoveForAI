@@ -3,6 +3,7 @@ import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
 import { SpeakerGrid } from '../components/SpeakerGrid';
 import { Agenda } from '../components/Agenda';
+import { Workshops } from '../components/Workshops';
 // import { Waitlist } from '../components/Waitlist';
 import { Footer } from '../components/Footer' ;
 import { DeviceIntro } from '../components/DeviceIntro';
@@ -85,6 +86,7 @@ const HomePage: React.FC = () => {
 
         <SpeakerGrid />
         <Agenda />
+        <Workshops />
         
         {/* Venue Preview */}
         <section id="venue" className="py-24 bg-white text-black relative">

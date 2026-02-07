@@ -57,21 +57,56 @@ const PricingPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [screenshotFile, setScreenshotFile] = useState<File | null>(null);
+  const [screenshotPreview, setScreenshotPreview] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     college: '',
     year: '',
-    transactionId: ''
+    transactionId: '',
+    selectedDay: ''
   });
 
   const handlePlanSelect = (plan: any) => {
     setSelectedPlan(plan);
     setPaymentStep('details');
-    setFormData(prev => ({ ...prev, transactionId: '' }));
+    setFormData(prev => ({ ...prev, transactionId: '', selectedDay: '' }));
+    setScreenshotFile(null);
+    setScreenshotPreview(null);
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden';
+  };
+
+  const handleScreenshotChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        setErrorMessage('Please upload an image file (JPG, PNG, etc.)');
+        setTimeout(() => setErrorMessage(''), 5000);
+        return;
+      }
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setErrorMessage('Screenshot must be less than 5MB');
+        setTimeout(() => setErrorMessage(''), 5000);
+        return;
+      }
+      setScreenshotFile(file);
+      // Create preview URL
+      const previewUrl = URL.createObjectURL(file);
+      setScreenshotPreview(previewUrl);
+    }
+  };
+
+  const removeScreenshot = () => {
+    setScreenshotFile(null);
+    if (screenshotPreview) {
+      URL.revokeObjectURL(screenshotPreview);
+      setScreenshotPreview(null);
+    }
   };
 
   const closeModal = () => {
@@ -106,6 +141,12 @@ const PricingPage = () => {
     
     // If it's a paid plan and we are still in details step, move to payment step
     if (selectedPlan.price !== 'Free' && paymentStep === 'details') {
+      // Validate day selection for Standard Pass
+      if (selectedPlan.title === 'Standard Pass' && !formData.selectedDay) {
+        setErrorMessage('Please select which day you want to attend.');
+        setTimeout(() => setErrorMessage(''), 5000);
+        return;
+      }
       setPaymentStep('payment');
       return;
     }
@@ -113,6 +154,13 @@ const PricingPage = () => {
     // Validate UTR number is exactly 12 digits for paid plans
     if (selectedPlan.price !== 'Free' && formData.transactionId.length !== 12) {
       setErrorMessage('Please enter a valid 12-digit UTR number.');
+      setTimeout(() => setErrorMessage(''), 5000);
+      return;
+    }
+
+    // Validate screenshot is uploaded for paid plans
+    if (selectedPlan.price !== 'Free' && !screenshotFile) {
+      setErrorMessage('Please upload a screenshot of your payment.');
       setTimeout(() => setErrorMessage(''), 5000);
       return;
     }
@@ -137,6 +185,31 @@ const PricingPage = () => {
         return;
       }
 
+      // Upload screenshot to Supabase Storage if it's a paid plan
+      let screenshotUrl = null;
+      if (selectedPlan.price !== 'Free' && screenshotFile) {
+        const fileExt = screenshotFile.name.split('.').pop();
+        const fileName = `${formData.phone}_${formData.transactionId}_${Date.now()}.${fileExt}`;
+        
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('payment-screenshots')
+          .upload(fileName, screenshotFile, {
+            cacheControl: '3600',
+            upsert: false
+          });
+
+        if (uploadError) {
+          throw new Error('Failed to upload screenshot. Please try again.');
+        }
+
+        // Get public URL
+        const { data: urlData } = supabase.storage
+          .from('payment-screenshots')
+          .getPublicUrl(fileName);
+        
+        screenshotUrl = urlData.publicUrl;
+      }
+
       // Prepare registration data
       const registrationData = {
         name: formData.name,
@@ -148,6 +221,8 @@ const PricingPage = () => {
         plan_price: selectedPlan.price,
         payment_status: selectedPlan.price === 'Free' ? 'free' : 'pending_verification',
         transaction_id: selectedPlan.price === 'Free' ? null : formData.transactionId,
+        screenshot_url: screenshotUrl,
+        selected_day: selectedPlan.title === 'Standard Pass' ? formData.selectedDay : null,
       };
 
       // Create registration in Supabase
@@ -158,16 +233,8 @@ const PricingPage = () => {
 
       if (error) throw error;
 
-      // Show success message
+      // Show success message (no auto-close, user will close manually)
       setShowSuccess(true);
-      
-      // Close modal and reset after 15 seconds (give time to scan Telegram QR)
-      setTimeout(() => {
-        setShowSuccess(false);
-        closeModal();
-        setFormData({ name: '', email: '', phone: '', college: '', year: '', transactionId: '' });
-        setPaymentStep('details');
-      }, 20000);
       
     } catch (error: any) {
       console.error('Registration error:', error);
@@ -492,9 +559,19 @@ const PricingPage = () => {
                           </svg>
                           Join Telegram Group
                         </a>
-                        <p className="text-xs text-zinc-500 mt-3">
-                          This window will close automatically in a few seconds
-                        </p>
+                        <button
+                          onClick={() => {
+                            setShowSuccess(false);
+                            closeModal();
+                            setFormData({ name: '', email: '', phone: '', college: '', year: '', transactionId: '', selectedDay: '' });
+                            setScreenshotFile(null);
+                            setScreenshotPreview(null);
+                            setPaymentStep('details');
+                          }}
+                          className="mt-4 w-full py-2.5 sm:py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl font-bold uppercase tracking-wider text-xs sm:text-sm transition-all"
+                        >
+                          Close Window
+                        </button>
                       </motion.div>
                     </div>
                   </motion.div>
@@ -648,6 +725,30 @@ const PricingPage = () => {
                         <option value="Professional" className="bg-zinc-900">Professional</option>
                       </select>
                     </div>
+
+                    {/* Day Selection - Only for Standard Pass */}
+                    {selectedPlan?.title === 'Standard Pass' && (
+                      <div>
+                        <label htmlFor="selectedDay" className="block text-sm font-bold text-zinc-300 mb-2 uppercase tracking-wider">
+                          Select Day <span className="text-brand-crimson">*</span>
+                        </label>
+                        <select
+                          id="selectedDay"
+                          name="selectedDay"
+                          value={formData.selectedDay}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-brand-crimson transition-colors"
+                        >
+                          <option value="" className="bg-zinc-900">Choose your preferred day</option>
+                          <option value="Day 1 - Feb 13" className="bg-zinc-900">Day 1 - February 13th, 2026</option>
+                          <option value="Day 2 - Feb 14" className="bg-zinc-900">Day 2 - February 14th, 2026</option>
+                        </select>
+                        <p className="text-xs text-zinc-500 mt-2">
+                          Standard Pass allows access for one day only. Choose which day you'd like to attend.
+                        </p>
+                      </div>
+                    )}
                   </>
                 ) : (
                   <div className="space-y-6 text-center">
@@ -686,6 +787,59 @@ const PricingPage = () => {
                       </p>
                       <p className="text-xs text-zinc-500 mt-1">
                         * Incorrect UTR may lead to registration cancellation.
+                      </p>
+                    </div>
+
+                    {/* Payment Screenshot Upload */}
+                    <div className="text-left">
+                      <label className="block text-sm font-bold text-zinc-300 mb-2 uppercase tracking-wider">
+                        Payment Screenshot <span className="text-brand-crimson">*</span>
+                      </label>
+                      
+                      {!screenshotPreview ? (
+                        <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-white/20 rounded-xl cursor-pointer bg-white/5 hover:bg-white/10 hover:border-brand-crimson/50 transition-all">
+                          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg className="w-10 h-10 mb-3 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <p className="mb-2 text-sm text-zinc-400">
+                              <span className="font-semibold text-brand-crimson">Click to upload</span> payment screenshot
+                            </p>
+                            <p className="text-xs text-zinc-500">PNG, JPG (max 5MB)</p>
+                          </div>
+                          <input 
+                            type="file" 
+                            className="hidden" 
+                            accept="image/*"
+                            onChange={handleScreenshotChange}
+                          />
+                        </label>
+                      ) : (
+                        <div className="relative">
+                          <img 
+                            src={screenshotPreview} 
+                            alt="Payment Screenshot" 
+                            className="w-full h-40 object-contain rounded-xl border border-white/10 bg-white/5"
+                          />
+                          <button
+                            type="button"
+                            onClick={removeScreenshot}
+                            className="absolute top-2 right-2 p-1.5 bg-red-500/90 hover:bg-red-500 rounded-lg transition-colors"
+                          >
+                            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                          <p className="text-xs text-green-500 mt-2 flex items-center gap-1">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                            Screenshot uploaded successfully
+                          </p>
+                        </div>
+                      )}
+                      <p className="text-xs text-zinc-500 mt-2">
+                        Upload a clear screenshot showing the payment confirmation with UTR number.
                       </p>
                     </div>
                   </div>
