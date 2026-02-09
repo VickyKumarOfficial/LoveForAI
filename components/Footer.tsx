@@ -32,14 +32,13 @@ export const Footer: React.FC = () => {
               <ul className="space-y-2 text-xs text-white/40">
                 <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact Support</a></li>
+                <li><a href="/contact" className="hover:text-white transition-colors">Contact Us</a></li>
               </ul>
             </div>
             <div>
               <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-widest">Social</h4>
               <ul className="space-y-2 text-xs text-white/40">
-                <li><a href="#" className="hover:text-white transition-colors">Twitter (X)</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
+                <li><a href="https://www.linkedin.com/in/loveforai?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" className="hover:text-white transition-colors _blank">LinkedIn</a></li>
                 <li><a href="https://www.instagram.com/loveforai_2k26?igsh=ZmlnbHBsZWRwNGZn" className="hover:text-white transition-colors">Instagram</a></li>
               </ul>
             </div>

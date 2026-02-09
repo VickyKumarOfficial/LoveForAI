@@ -77,8 +77,8 @@ vercel --prod
    - **Output Directory**: `dist`
 5. Add Environment Variables:
    ```
-   VITE_SUPABASE_URL=https://yinepyembgpioltaomcp.supabase.co
-   VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
    VITE_RAZORPAY_KEY_ID=your_razorpay_key
    ```
 6. Click **"Deploy"**

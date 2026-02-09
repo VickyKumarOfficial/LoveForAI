@@ -37,7 +37,7 @@ export function ConferenceTimeline() {
       content: (
         <div>
           <h3 className="text-2xl font-bold mb-4 text-brand-crimson">TECHNICAL</h3>
-          <h4 className="text-xl font-semibold mb-4 text-white">BANKING BEYOND BASICS - [with Mr. Surya Prakash] [WELLS FARGO]</h4>
+          <h4 className="text-xl font-semibold mb-4 text-white">BANKING BEYOND BASICS - [with Mr. I. Surya Prakash] [WELLS FARGO]</h4>
           <p className="mb-6 text-xs font-normal text-white/70 md:text-sm">
             Deep dive into modern banking systems and financial technology innovations.
           </p>
@@ -47,7 +47,7 @@ export function ConferenceTimeline() {
                 <span className="text-brand-crimson font-bold text-sm">SP</span>
               </div>
               <div>
-                <p className="font-semibold text-white">Mr. Surya Prakash</p>
+                <p className="font-semibold text-white">Mr. I. Surya Prakash</p>
                 <p className="text-sm text-white/60">Wells Fargo</p>
               </div>
             </div>
@@ -67,7 +67,7 @@ export function ConferenceTimeline() {
       ),
     },
     {
-      title: "1:45 PM - 2:30 PM",
+      title: "11:15 AM - 12:10 PM",
       content: (
         <div>
           <h3 className="text-2xl font-bold mb-4 text-brand-crimson">TECHNICAL</h3>
@@ -75,6 +75,29 @@ export function ConferenceTimeline() {
           <p className="mb-6 text-xs font-normal text-white/70 md:text-sm">
             Comprehensive look into MongoDB database administration and optimization techniques.
           </p>
+        </div>
+      ),
+    },
+    {
+      title: "1:45 PM - 2:30 PM",
+      content: (
+        <div>
+          <h3 className="text-2xl font-bold mb-4 text-brand-crimson">TECHNICAL</h3>
+          <h4 className="text-xl font-semibold mb-4 text-white">IPR BEYOND BASICS</h4>
+          <p className="mb-6 text-xs font-normal text-white/70 md:text-sm">
+            Understanding Intellectual Property Rights and their importance in the tech industry.
+          </p>
+          <div className="mb-6 p-4 bg-brand-crimson/10 rounded-lg border-l-4 border-brand-crimson">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-brand-crimson/20 flex items-center justify-center">
+                <span className="text-brand-crimson font-bold text-sm">SS</span>
+              </div>
+              <div>
+                <p className="font-semibold text-white">Mr. Subhajit Saha</p>
+                <p className="text-sm text-white/60">Resolute IP Services</p>
+              </div>
+            </div>
+          </div>
         </div>
       ),
     },
@@ -160,12 +183,12 @@ export function ConferenceTimeline() {
       content: (
         <div>
           <h3 className="text-2xl font-bold mb-4 text-brand-crimson">TECHNICAL</h3>
-          <h4 className="text-xl font-semibold mb-4 text-white">AGENTIC AI : POWERED BY NVIDIA</h4>
+          <h4 className="text-xl font-semibold mb-4 text-white">MINDS, MACHINES & MORALS</h4>
           <p className="mb-6 text-xs font-normal text-white/70 md:text-sm">
-            Advanced AI agents and their applications powered by NVIDIA technology.
+            Exploring the intersection of artificial intelligence, consciousness, and ethics.
           </p>
           <p className="text-xs text-white/60 md:text-sm">
-            [Curated by Dr. Arpita Gupta]
+            [EXPERT PANEL, MODERATED LIVE]
           </p>
         </div>
       ),
@@ -182,16 +205,16 @@ export function ConferenceTimeline() {
       ),
     },
     {
-      title: "1:45 PM - 2:30 PM",
+      title: "1:45 PM - 2:45 PM",
       content: (
         <div>
           <h3 className="text-2xl font-bold mb-4 text-brand-crimson">TECHNICAL</h3>
-          <h4 className="text-xl font-semibold mb-4 text-white">MINDS, MACHINES & MORALS</h4>
+          <h4 className="text-xl font-semibold mb-4 text-white">AGENTIC AI : POWERED BY NVIDIA</h4>
           <p className="mb-6 text-xs font-normal text-white/70 md:text-sm">
-            Exploring the intersection of artificial intelligence, consciousness, and ethics.
+            Advanced AI agents and their applications powered by NVIDIA technology.
           </p>
           <p className="text-xs text-white/60 md:text-sm">
-            [EXPERT PANEL, MODERATED LIVE]
+            [Curated by Dr. Arpita Gupta]
           </p>
         </div>
       ),
@@ -213,7 +236,7 @@ export function ConferenceTimeline() {
       content: (
         <div>
           <h3 className="text-2xl font-bold mb-4 text-orange-400">CULTURAL</h3>
-          <h4 className="text-xl font-semibold mb-4 text-white">MINDTRIAL</h4>
+          <h4 className="text-xl font-semibold mb-4 text-white">MINDTRAIL</h4>
           <p className="mb-4 text-xs font-normal text-white/70 md:text-sm">
             Mental challenges and brain training activities.
           </p>

@@ -6,7 +6,8 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Schedule', href: '#schedule' },
   { label: 'Venue', href: '#venue' },
   { label: 'About', href: '#about' },
-  { label: 'Community', href: '#community' },
+  { label: 'Committee', href: '/committee' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const SPEAKERS: Speaker[] = [

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import ShinyText from './ui/ShinyText';
 
 const SLOGANS = [
   "Where intelligence evolves",
@@ -30,9 +31,15 @@ export const Hero: React.FC = () => {
 
 
       <div className="container mx-auto px-6 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/60 text-xs font-semibold uppercase tracking-widest mb-8">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-semibold uppercase tracking-widest mb-8">
           <span className="w-2 h-2 rounded-full bg-brand-crimson"></span>
-          February 13-14, 2026 • KLH Aziz Nagar
+          <ShinyText 
+            text="February 13-14, 2026 • KLH Aziz Nagar" 
+            color="#a1a1aa"
+            shineColor="#ffffff"
+            speed={3}
+            delay={1}
+          />
         </div>
         
         <h1 className="text-6xl md:text-9xl font-display font-black tracking-tight mb-2 leading-[0.9]">

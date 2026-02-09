@@ -59,6 +59,8 @@ const PricingPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [screenshotFile, setScreenshotFile] = useState<File | null>(null);
   const [screenshotPreview, setScreenshotPreview] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState('');
+  const [utrError, setUtrError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -120,20 +122,73 @@ const PricingPage = () => {
     };
   }, []);
 
+  // ── Phone number validation ──
+  const validatePhone = (phone: string): string => {
+    if (!phone) return '';
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length !== 10) return 'Phone number must be exactly 10 digits.';
+    if (!/^[6-9]/.test(digits)) return 'Indian mobile numbers start with 6, 7, 8 or 9.';
+    if (/^(\d)\1{9}$/.test(digits)) return 'Invalid phone number (all same digits).';
+    if (/^(0123456789|1234567890|9876543210|0987654321)$/.test(digits)) return 'Invalid phone number (sequential digits).';
+    if (/^(\d)\1{4,}/.test(digits) || /(\d)\1{4,}$/.test(digits)) return 'Phone number looks invalid (too many repeated digits).';
+    // Alternating pair pattern: 9898989898, 7171717171, etc.
+    if (/^(\d\d)\1{4}$/.test(digits)) return 'Invalid phone number (repeating pattern).';
+    // Ascending from start digit: 6789012345, 7890123456, 8901234567, 9012345678
+    const ascending = '0123456789012345';
+    if (ascending.includes(digits)) return 'Invalid phone number (sequential digits).';
+    // Descending from start digit
+    const descending = '9876543210987654';
+    if (descending.includes(digits)) return 'Invalid phone number (sequential digits).';
+    return '';
+  };
+
+  // ── UTR / Transaction ID validation ──
+  const FAKE_WORDS = /^(test|testing|fake|dummy|sample|abcd|abcdef|xyz|none|na|nil|null|random|asdf|qwerty|asdfgh|password|pay|paid|done|ok|hello|hi)$/i;
+  const validateUTR = (utr: string): string => {
+    if (!utr) return '';
+    const trimmed = utr.trim();
+    if (trimmed.length < 8) return 'Transaction ID is too short (minimum 8 characters).';
+    if (trimmed.length > 25) return 'Transaction ID is too long (maximum 25 characters).';
+    if (!/^[A-Za-z0-9]+$/.test(trimmed)) return 'Transaction ID must contain only letters and numbers.';
+    // All same character
+    if (/^(.)\1+$/.test(trimmed)) return 'Invalid Transaction ID (all same characters).';
+    // Common fake words / test values
+    if (FAKE_WORDS.test(trimmed)) return 'Please enter your real Transaction ID, not a placeholder.';
+    // Keyboard smash patterns
+    if (/^(qwerty|asdfgh|zxcvbn)/i.test(trimmed)) return 'Invalid Transaction ID (keyboard pattern).';
+    // Sequential digits (ascending or descending)
+    if (/^0?1234567890/.test(trimmed) || /^9876543210/.test(trimmed)) return 'Invalid Transaction ID (sequential pattern).';
+    // Repeating short pair/triplet patterns: 121212121212, abababababab, 123123123123
+    if (/^(.{1,3})\1{3,}$/.test(trimmed)) return 'Invalid Transaction ID (repeating pattern).';
+    // All zeros
+    if (/^0+$/.test(trimmed)) return 'Invalid Transaction ID.';
+    // UPI UTRs are typically 12 digits; NEFT/IMPS can be 16-22 alphanumeric
+    const isAllDigits = /^\d+$/.test(trimmed);
+    if (isAllDigits && ![12, 16, 22].includes(trimmed.length) && trimmed.length < 8) return 'Numeric Transaction IDs are usually 12 digits (UPI) or 16+ digits (bank transfer).';
+    // Purely alphabetic is suspicious for a UTR
+    if (/^[A-Za-z]+$/.test(trimmed)) return 'Transaction IDs usually contain numbers. Please check your UTR.';
+    return '';
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (name === 'phone') {
+      setPhoneError(validatePhone(value.replace(/\D/g, '')));
+    }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Only allow digits, max 10
+    const raw = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setFormData({ ...formData, phone: raw });
+    setPhoneError(validatePhone(raw));
   };
 
   const handleTransactionIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Accept any alphanumeric characters for UTR/Transaction ID
-    const value = e.target.value.trim();
-    setFormData({
-      ...formData,
-      transactionId: value
-    });
+    const value = e.target.value.replace(/\s/g, '');  // strip spaces
+    setFormData({ ...formData, transactionId: value });
+    setUtrError(validateUTR(value));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -151,11 +206,31 @@ const PricingPage = () => {
       return;
     }
 
+    // ── Validate phone number at submit time ──
+    const phoneErr = validatePhone(formData.phone);
+    if (phoneErr) {
+      setPhoneError(phoneErr);
+      setErrorMessage(phoneErr);
+      setTimeout(() => setErrorMessage(''), 5000);
+      return;
+    }
+
     // Validate UTR/Transaction ID is not empty for paid plans
     if (selectedPlan.price !== 'Free' && !formData.transactionId.trim()) {
       setErrorMessage('Please enter your UTR/Transaction ID.');
       setTimeout(() => setErrorMessage(''), 5000);
       return;
+    }
+
+    // ── Validate UTR pattern at submit time ──
+    if (selectedPlan.price !== 'Free') {
+      const utrErr = validateUTR(formData.transactionId);
+      if (utrErr) {
+        setUtrError(utrErr);
+        setErrorMessage(utrErr);
+        setTimeout(() => setErrorMessage(''), 5000);
+        return;
+      }
     }
 
     // Validate screenshot is uploaded for paid plans
@@ -183,6 +258,23 @@ const PricingPage = () => {
         setIsLoading(false);
         setTimeout(() => setErrorMessage(''), 5000);
         return;
+      }
+
+      // Check for duplicate UTR / Transaction ID (same UTR used by someone else = likely fake)
+      if (selectedPlan.price !== 'Free' && formData.transactionId.trim()) {
+        const { data: existingUTR, error: utrCheckError } = await supabase
+          .from('registrations')
+          .select('name, transaction_id')
+          .eq('transaction_id', formData.transactionId.trim())
+          .limit(1);
+
+        if (!utrCheckError && existingUTR && existingUTR.length > 0) {
+          setUtrError('This Transaction ID has already been used.');
+          setErrorMessage(`This Transaction ID is already used by another registration. Please enter your own unique UTR.`);
+          setIsLoading(false);
+          setTimeout(() => setErrorMessage(''), 5000);
+          return;
+        }
       }
 
       // Upload screenshot to Supabase Storage if it's a paid plan
@@ -564,6 +656,8 @@ const PricingPage = () => {
                             setShowSuccess(false);
                             closeModal();
                             setFormData({ name: '', email: '', phone: '', college: '', year: '', transactionId: '', selectedDay: '' });
+                            setPhoneError('');
+                            setUtrError('');
                             setScreenshotFile(null);
                             setScreenshotPreview(null);
                             setPaymentStep('details');
@@ -678,12 +772,17 @@ const PricingPage = () => {
                         id="phone"
                         name="phone"
                         value={formData.phone}
-                        onChange={handleInputChange}
+                        onChange={handlePhoneChange}
                         required
-                        pattern="[0-9]{10}"
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-brand-crimson transition-colors"
+                        maxLength={10}
+                        className={`w-full px-4 py-3 bg-white/5 border rounded-xl text-white placeholder-zinc-500 focus:outline-none transition-colors ${
+                          phoneError ? 'border-red-500 focus:border-red-500' : 'border-white/10 focus:border-brand-crimson'
+                        }`}
                         placeholder="10-digit mobile number"
                       />
+                      {phoneError && (
+                        <p className="text-xs text-red-400 mt-1">{phoneError}</p>
+                      )}
                     </div>
 
                     {/* College */}
@@ -767,7 +866,7 @@ const PricingPage = () => {
 
                     <div className="text-left">
                       <label htmlFor="transactionId" className="block text-sm font-bold text-zinc-300 mb-2 uppercase tracking-wider">
-                        Transaction ID / UTR Number <span className="text-brand-crimson">*</span>
+                         Transaction ID <span className="text-brand-crimson">*</span>
                       </label>
                       <input
                         type="text"
@@ -776,14 +875,20 @@ const PricingPage = () => {
                         value={formData.transactionId}
                         onChange={handleTransactionIdChange}
                         required={selectedPlan?.price !== 'Free'}
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-brand-crimson transition-colors"
-                        placeholder="Enter your UTR / Transaction ID"
+                        maxLength={25}
+                        className={`w-full px-4 py-3 bg-white/5 border rounded-xl text-white placeholder-zinc-500 focus:outline-none transition-colors ${
+                          utrError ? 'border-red-500 focus:border-red-500' : 'border-white/10 focus:border-brand-crimson'
+                        }`}
+                        placeholder="Enter your 12-digit UPI UTR number"
                       />
+                      {utrError && (
+                        <p className="text-xs text-red-400 mt-1">{utrError}</p>
+                      )}
                       <p className="text-xs text-zinc-500 mt-2">
-                        Enter the UTR or Transaction ID from your payment app's transaction history.
+                        Enter the Transaction ID from your payment app's transaction history.
                       </p>
                       <p className="text-xs text-zinc-500 mt-1">
-                        * Incorrect UTR may lead to registration cancellation.
+                        *NOTE: Incorrect Transaction ID may lead to registration cancellation.
                       </p>
                     </div>
 

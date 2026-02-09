@@ -33,8 +33,20 @@ export const Navbar: React.FC = () => {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          {NAV_ITEMS.map((item) => (
-            isHomePage ? (
+          {NAV_ITEMS.map((item) => {
+            const isPageLink = item.href.startsWith('/');
+            if (isPageLink) {
+              return (
+                <Link 
+                  key={item.href} 
+                  to={item.href}
+                  className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+                >
+                  {item.label}
+                </Link>
+              );
+            }
+            return isHomePage ? (
               <a 
                 key={item.href} 
                 href={item.href}
@@ -50,8 +62,8 @@ export const Navbar: React.FC = () => {
               >
                 {item.label}
               </Link>
-            )
-          ))}
+            );
+          })}
           <Link 
             to="/pricing" 
             className="px-5 py-2.5 bg-white text-black text-sm font-bold rounded-full hover:bg-brand-crimson hover:text-white transition-all transform hover:scale-105 active:scale-95"
@@ -79,8 +91,21 @@ export const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-lg border-b border-white/10 p-6 flex flex-col gap-4 shadow-2xl">
-          {NAV_ITEMS.map((item) => (
-            isHomePage ? (
+          {NAV_ITEMS.map((item) => {
+            const isPageLink = item.href.startsWith('/');
+            if (isPageLink) {
+              return (
+                <Link 
+                  key={item.href} 
+                  to={item.href}
+                  className="text-lg font-medium text-white/90 hover:text-brand-crimson transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              );
+            }
+            return isHomePage ? (
               <a 
                 key={item.href} 
                 href={item.href}
@@ -98,8 +123,8 @@ export const Navbar: React.FC = () => {
               >
                 {item.label}
               </Link>
-            )
-          ))}
+            );
+          })}
           <Link
             to="/pricing"
             className="px-5 py-3 bg-white text-black text-center text-sm font-bold rounded-full hover:bg-brand-crimson hover:text-white transition-all mt-2"
