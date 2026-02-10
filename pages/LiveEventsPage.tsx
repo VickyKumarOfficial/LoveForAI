@@ -35,7 +35,27 @@ const liveEvents: LiveEvent[] = [
     title: "POT Event",
     image: "/assets/pot.jpeg",
     alt: "POT Event Poster"
-  }
+  },
+  {
+    id: 5,
+    title: "Face painting",
+    image: "/assets/facepainting.jpeg",
+    alt: "Face Painting Event Poster"
+  },
+  {
+    id: 6,
+    title: "Virtual Simulator",
+    image: "/assets/virtual simulator.jpeg",
+    alt: "Virtual Simulator Event Poster"
+  },
+  {
+    id: 7,
+    title: "Todebag Painting",
+    image: "/assets/todebagpainting.jpeg",
+    alt: "Todebag Painting Event Poster"
+  },
+
+
 ];
 
 const containerVariants = {
