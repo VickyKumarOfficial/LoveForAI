@@ -1,33 +1,19 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import mongodbImg from '../assets/mongodb-badge.png';
-import nvidiaImg from '../assets/nvidia-badge.png';
 
 const workshops = [
   {
     id: 1,
-    title: "MongoDB: Architecting the Future",
-    description: "Deep dive into document-based database architecture, performance optimization, and building scalable AI apps with MongoDB Atlas.",
-    benefits: ["MongoDB Certification ($150 value)", "Hands-on lab sessions", "Database design patterns", "MongoDB Atlas AI integration"],
-    image: mongodbImg,
-    color: "from-green-500/20 to-emerald-900/20",
-    borderColor: "border-emerald-500/30",
-    iconColor: "text-emerald-500",
-    badgeText: "$150 Certification FREE",
-    featured: true
+    title: "MongoDB Workshop",
+    image: "/assets/MongoDB.jpeg",
+    alt: "MongoDB Workshop Poster"
   },
   {
     id: 2,
-    title: "Nvidia: GPU Accelerated AI",
-    description: "Master the art of high-performance computing. Learn how to leverage CUDA and Nvidia's latest AI frameworks to build lightning-fast models.",
-    benefits: ["Nvidia Certification (₹ 45288 value)", "Access to DGX cloud", "CUDA optimization techniques"],
-    image: nvidiaImg,
-    color: "from-brand-crimson/20 to-brand-rose/20",
-    borderColor: "border-brand-crimson/30",
-    iconColor: "text-brand-crimson",
-    badgeText: "₹ 45288 Certification FREE",
-    featured: true
+    title: "NVIDIA Workshop",
+    image: "/assets/NVIDIA.jpeg",
+    alt: "NVIDIA Workshop Poster"
   }
 ];
 
@@ -75,60 +61,21 @@ export const Workshops: React.FC = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+          className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto items-start"
         >
           {workshops.map((workshop) => (
             <motion.div 
               key={workshop.id}
               variants={cardVariants}
-              whileHover={{ y: -10 }}
-              className={`group relative p-1 rounded-[2.5rem] bg-gradient-to-br ${workshop.color} border ${workshop.borderColor} h-full overflow-hidden transition-all duration-500`}
+              className="group relative"
             >
-              <div className="bg-zinc-900/90 backdrop-blur-3xl p-8 md:p-12 rounded-[2.3rem] h-full flex flex-col items-center text-center">
-                {/* Image Container */}
-                <div className="relative mb-8 h-32 w-full flex items-center justify-center">
-                  <div className="absolute inset-0 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors duration-500" />
-                  <motion.img 
-                    src={workshop.image} 
-                    alt={workshop.title}
-                    className="relative z-10 max-h-full max-w-[240px] object-contain group-hover:scale-110 transition-transform duration-500 brightness-110 contrast-125 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
-                  />
-                  {workshop.featured && (
-                    <div className="absolute -top-4 -right-4 bg-brand-crimson text-white text-[10px] font-black uppercase px-4 py-2 rounded-full shadow-lg shadow-brand-crimson/50">
-                      {workshop.badgeText}
-                    </div>
-                  )}
-                </div>
-
-                <h3 className="text-3xl font-display font-bold mb-4 text-white uppercase tracking-tight">
-                  {workshop.id === 1 ? (
-                    <>Inside <span className="text-emerald-500">MongoDB</span></>
-                  ) : (
-                    <>Accelerate with <span className="text-brand-crimson">Nvidia</span></>
-                  )}
-                </h3>
-                
-                <p className="text-zinc-400 mb-8 leading-relaxed italic">
-                  "{workshop.description}"
-                </p>
-
-                <div className="space-y-3 w-full text-left">
-                  {workshop.benefits.map((benefit, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <div className={`w-1.5 h-1.5 rounded-full ${workshop.iconColor} bg-current`} />
-                      <span className="text-zinc-300 text-sm font-medium">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 pt-8 border-t border-white/10 w-full">
-                  <div className={`inline-flex items-center gap-2 font-bold uppercase tracking-widest text-xs ${workshop.iconColor} group-hover:gap-4 transition-all`}>
-                    Workshop Details Coming Soon
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-                </div>
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl mb-4 bg-white/5 grayscale group-hover:grayscale-0 transition-all duration-500">
+                <img 
+                  src={workshop.image} 
+                  alt={workshop.alt}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
               </div>
             </motion.div>
           ))}

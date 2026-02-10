@@ -56,24 +56,25 @@ export function ConferenceTimeline() {
       ),
     },
     {
-      title: "12:15 PM - 1:30 PM",
+      title: "11:15 AM - 12:10 PM",
       content: (
         <div>
-          <h3 className="text-2xl font-bold mb-4 text-white">LUNCH</h3>
-          <p className="mb-4 text-xs font-normal text-white/70 md:text-sm">
-            Networking lunch break with delicious food and beverages.
+          <h3 className="text-2xl font-bold mb-4 text-brand-crimson">TECHNICAL</h3>
+                    <h4 className="text-xl font-semibold mb-4 text-white">INSIDE MONGO DB : DBA EDITION</h4>
+
+          <p className="mb-6 text-xs font-normal text-white/70 md:text-sm">
+            Comprehensive look into MongoDB database administration and optimization techniques.
           </p>
         </div>
       ),
     },
     {
-      title: "11:15 AM - 12:10 PM",
+      title: "12:15 PM - 1:30 PM",
       content: (
         <div>
-          <h3 className="text-2xl font-bold mb-4 text-brand-crimson">TECHNICAL</h3>
-          <h4 className="text-xl font-semibold mb-4 text-white">INSIDE MONGO DB : DBA EDITION</h4>
-          <p className="mb-6 text-xs font-normal text-white/70 md:text-sm">
-            Comprehensive look into MongoDB database administration and optimization techniques.
+          <h3 className="text-2xl font-bold mb-4 text-brand-crimson">LUNCH</h3>
+          <p className="mb-4 text-xs font-normal text-white/70 md:text-sm">
+            Networking lunch break with delicious food and beverages.
           </p>
         </div>
       ),

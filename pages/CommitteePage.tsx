@@ -39,11 +39,11 @@ const TECHNICAL_COMMITTEE: CommitteeMember[] = [
     role: 'Sponsers',
     image: portrait('Nakshatra'),
   },
-  {
-    name: 'Nuha',
-    role: 'Event Management & Panels/Talks/Workshop',
-    image: portrait('Nuha'),
-  },
+  // {
+  //   name: 'Nuha',
+  //   role: 'Event Management & Panels/Talks/Workshop',
+  //   image: portrait('Nuha'),
+  // },
   {
     name: 'Amrutha',
     role: 'Event Management',
@@ -106,11 +106,11 @@ const CULTURAL_COMMITTEE: CommitteeMember[] = [
     role: 'Event Management',
     image: portrait('Sahasra'),
   },
-  {
-    name: 'Nuha',
-    role: 'Event Management',
-    image: portrait('Nuha'),
-  },
+  // {
+  //   name: 'Nuha',
+  //   role: 'Event Management',
+  //   image: portrait('Nuha'),
+  // },
   {
     name: 'Amrutha',
     role: 'Designing',
@@ -121,11 +121,11 @@ const CULTURAL_COMMITTEE: CommitteeMember[] = [
     role: 'Designing',
     image: portrait('Shiva'),
   },
-  {
-    name: 'Kyathi',
-    role: 'Designing',
-    image: portrait('Kyathi'),
-  },
+  // {
+  //   name: 'Kyathi',
+  //   role: 'Designing',
+  //   image: portrait('Kyathi'),
+  // },
 ];
 
 const container = {
@@ -187,7 +187,7 @@ const CommitteePage: React.FC = () => {
               >
                 {TECHNICAL_COMMITTEE.map((member) => (
                   <motion.div key={member.name} variants={item} className="group relative">
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-2xl mb-4 bg-white/5 grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-2xl mb-4 bg-white/5 grayscale group-hover:grayscale-0 transition-all duration-500 border-2 border-white/20">
                       <img 
                         src={member.image} 
                         alt={member.name}
@@ -232,7 +232,7 @@ const CommitteePage: React.FC = () => {
               >
                 {CULTURAL_COMMITTEE.map((member) => (
                   <motion.div key={member.name} variants={item} className="group relative">
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-2xl mb-4 bg-white/5 grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-2xl mb-4 bg-white/5 grayscale group-hover:grayscale-0 transition-all duration-500 border-2 border-white/20">
                       <img 
                         src={member.image} 
                         alt={member.name}

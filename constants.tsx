@@ -4,8 +4,7 @@ import { Speaker, Session, NavItem } from './types';
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Speakers', href: '#speakers' },
   { label: 'Schedule', href: '#schedule' },
-  { label: 'Venue', href: '#venue' },
-  { label: 'About', href: '#about' },
+  { label: 'Live Events', href: '/Live Events' },
   { label: 'Committee', href: '/committee' },
   { label: 'Contact', href: '/contact' },
 ];
