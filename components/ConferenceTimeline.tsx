@@ -108,9 +108,23 @@ export function ConferenceTimeline() {
         <div>
           <h3 className="text-2xl font-bold mb-4 text-orange-400">CULTURAL</h3>
           <h4 className="text-xl font-semibold mb-4 text-white">FREE FIRE SHOWDOWN</h4>
-          <p className="mb-4 text-xs font-normal text-white/70 md:text-sm">
+          <p className="mb-2 text-xs font-normal text-white/70 md:text-sm">
             Gaming tournament and entertainment session.
           </p>
+          <p className="mb-4 text-sm font-semibold text-brand-crimson">
+            Entry Fee: ₹50 per player
+          </p>
+          <a
+            href="https://forms.gle/VVjWrrmdUJN8kZBy6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-crimson text-white font-bold text-sm uppercase rounded-full hover:bg-brand-rose transition-all duration-300 transform hover:scale-105 shadow-lg shadow-brand-crimson/25"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            <span>Register Now</span>
+          </a>
         </div>
       ),
     },
@@ -226,9 +240,23 @@ export function ConferenceTimeline() {
         <div>
           <h3 className="text-2xl font-bold mb-4 text-orange-400">CULTURAL</h3>
           <h4 className="text-xl font-semibold mb-4 text-white">BATTLEGROUND BLITZ</h4>
-          <p className="mb-4 text-xs font-normal text-white/70 md:text-sm">
+          <p className="mb-2 text-xs font-normal text-white/70 md:text-sm">
             Competitive gaming tournament and esports showcase.
           </p>
+          <p className="mb-4 text-sm font-semibold text-brand-crimson">
+            Entry Fee: ₹70 per player
+          </p>
+          <a
+            href="https://forms.gle/VVjWrrmdUJN8kZBy6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-brand-crimson text-white font-bold text-sm uppercase rounded-full hover:bg-brand-rose transition-all duration-300 transform hover:scale-105 shadow-lg shadow-brand-crimson/25"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            <span>Register Now</span>
+          </a>
         </div>
       ),
     },

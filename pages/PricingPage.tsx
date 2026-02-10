@@ -536,6 +536,136 @@ const PricingPage = () => {
             </div>
           </motion.div>
 
+          {/* Gaming Events Registration */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="mt-16 max-w-4xl mx-auto"
+          >
+            <div className="text-center mb-8">
+              <h3 className="text-3xl font-display font-black uppercase mb-2 text-white">Gaming Tournaments</h3>
+              <p className="text-zinc-400">Register for our exciting esports competitions</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Free Fire Showdown */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 }}
+                className="relative flex flex-col h-full rounded-3xl p-8 border bg-white/5 border-white/10 hover:border-white/20 backdrop-blur-sm hover:scale-105 transition-all duration-300"
+              >
+                <div className="text-center mb-8">
+                  <div className="mb-4 flex justify-center">
+                    <img src="/assets/freefire.png" alt="Free Fire" className="w-24 h-24 object-contain" />
+                  </div>
+                  <h3 className="text-2xl font-display font-black uppercase mb-2">Free Fire Showdown</h3>
+                  <p className="text-zinc-400 text-sm mb-6">Day 1 - Gaming Tournament</p>
+                  <div className="flex items-end justify-center gap-1">
+                    <span className="text-5xl font-black text-brand-crimson">₹50</span>
+                    <span className="text-zinc-500 mb-2">/player</span>
+                  </div>
+                </div>
+
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3 text-sm">
+                    <svg className="w-5 h-5 text-brand-crimson shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-zinc-300">10:00 AM - 12:15 PM</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm">
+                    <svg className="w-5 h-5 text-brand-crimson shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-zinc-300">Competitive gaming tournament</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm">
+                    <svg className="w-5 h-5 text-brand-crimson shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-zinc-300">Exciting prizes and rewards</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm">
+                    <svg className="w-5 h-5 text-brand-crimson shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-zinc-300">Team-based competition</span>
+                  </li>
+                </ul>
+
+                <a
+                  href="https://forms.gle/VVjWrrmdUJN8kZBy6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto w-full py-4 px-6 rounded-xl font-bold uppercase tracking-wider text-sm transition-all duration-300 bg-brand-crimson text-white hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/30 text-center"
+                >
+                  Register Now
+                </a>
+              </motion.div>
+
+              {/* Battleground Blitz */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8 }}
+                className="relative flex flex-col h-full rounded-3xl p-8 border bg-white/5 border-white/10 hover:border-white/20 backdrop-blur-sm hover:scale-105 transition-all duration-300"
+              >
+                <div className="text-center mb-8">
+                  <div className="mb-4 flex justify-center">
+                    <img src="/assets/Battleground.png" alt="Battleground" className="w-24 h-24 object-contain" />
+                  </div>
+                  <h3 className="text-2xl font-display font-black uppercase mb-2">Battleground Blitz</h3>
+                  <p className="text-zinc-400 text-sm mb-6">Day 2 - Esports Showcase</p>
+                  <div className="flex items-end justify-center gap-1">
+                    <span className="text-5xl font-black text-brand-crimson">₹70</span>
+                    <span className="text-zinc-500 mb-2">/player</span>
+                  </div>
+                </div>
+
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3 text-sm">
+                    <svg className="w-5 h-5 text-brand-crimson shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-zinc-300">10:00 AM - 12:15 PM</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm">
+                    <svg className="w-5 h-5 text-brand-crimson shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-zinc-300">Professional esports competition</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm">
+                    <svg className="w-5 h-5 text-brand-crimson shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-zinc-300">Amazing prizes for winners</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm">
+                    <svg className="w-5 h-5 text-brand-crimson shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-zinc-300">Strategic team gameplay</span>
+                  </li>
+                </ul>
+
+                <a
+                  href="https://forms.gle/VVjWrrmdUJN8kZBy6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto w-full py-4 px-6 rounded-xl font-bold uppercase tracking-wider text-sm transition-all duration-300 bg-brand-crimson text-white hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/30 text-center"
+                >
+                  Register Now
+                </a>
+              </motion.div>
+            </div>
+          </motion.div>
+
           
 
           {/* Back to Home */}
