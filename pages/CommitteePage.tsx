@@ -27,7 +27,7 @@ const TECHNICAL_COMMITTEE: CommitteeMember[] = [
   {
     name: 'Varun',
     role: 'Sponsers',
-    image: '/assets/committee/Varun.webp',
+    image: '/assets/committee/varun.webp',
   },
   {
     name: 'Varshitha',
