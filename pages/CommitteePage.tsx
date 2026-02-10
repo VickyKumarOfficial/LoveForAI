@@ -27,7 +27,7 @@ const TECHNICAL_COMMITTEE: CommitteeMember[] = [
   {
     name: 'Varun',
     role: 'Sponsers',
-    image: portrait('Varun'),
+    image: '/assets/committee/Varun.webp',
   },
   {
     name: 'Varshitha',
@@ -35,9 +35,9 @@ const TECHNICAL_COMMITTEE: CommitteeMember[] = [
     image: portrait('Varshitha'),
   },
   {
-    name: 'Nakshatra',
+    name: 'Ananya',
     role: 'Sponsers',
-    image: portrait('Nakshatra'),
+    image: '/assets/committee/Ananya.webp',
   },
   // {
   //   name: 'Nuha',
@@ -68,6 +68,11 @@ const TECHNICAL_COMMITTEE: CommitteeMember[] = [
     name: 'Smruti',
     role: 'Web Dev',
     image: portrait('Smruti'),
+  },
+  {
+    name: 'Dwarkesh',
+    role: 'Web Dev',
+    image: '/assets/committee/Dwarkesh.webp',
   }
 ];
 const CULTURAL_COMMITTEE: CommitteeMember[] = [
@@ -94,7 +99,7 @@ const CULTURAL_COMMITTEE: CommitteeMember[] = [
   {
     name: 'Ritish',
     role: 'Movie / Films',
-    image: portrait('Ritish'),
+    image: '/assets/committee/Ritesh.webp',
   },
   {
     name: 'Srivali',
@@ -105,6 +110,11 @@ const CULTURAL_COMMITTEE: CommitteeMember[] = [
     name: 'Sahasra',
     role: 'Event Management',
     image: portrait('Sahasra'),
+  },
+  {
+    name: 'B Pavan Kumar Reddy',
+    role: 'Event Management',
+    image: portrait('pavan'),
   },
   // {
   //   name: 'Nuha',
@@ -217,7 +227,7 @@ const CommitteePage: React.FC = () => {
                 className="flex flex-col md:flex-row items-end justify-between mb-16 gap-4"
               >
                 <div>
-                  <span className="text-brand-crimson font-bold uppercase tracking-widest text-sm mb-2 block">Technical Committee</span>
+                  <span className="text-brand-crimson font-bold uppercase tracking-widest text-sm mb-2 block">Cultural Committee</span>
                   <h1 className="text-5xl font-display font-bold">Core Team</h1>
                 </div>
                 

@@ -12,16 +12,6 @@ export const NAV_ITEMS: NavItem[] = [
 export const SPEAKERS: Speaker[] = [
   {
     id: '1',
-    name: 'Shahar Banu',
-    role: 'Senior DevOps Specialist',
-    company: 'Equisoft',
-    companyUrl: 'https://www.equisoft.com/',
-    image: '/assets/shahar.webp',
-    bio: 'AWS Cloud Engineer and DevOps expert with 12+ years of experience & keynote speaker.',
-    linkedin: 'https://www.linkedin.com/in/shaharbanu/'
-  },
-  {
-    id: '2',
     name: 'Srini Adiraju',
     role: 'CTO',
     company: 'Aruze Gaming Global',
@@ -31,7 +21,7 @@ export const SPEAKERS: Speaker[] = [
     linkedin: 'https://www.linkedin.com/in/sriniadiraju/'
   },
   {
-    id: '3',
+    id: '2',
     name: 'Subhajit Saha',
     role: 'CEO',
     companyUrl: 'https://resolutegoc.com/',
@@ -41,7 +31,7 @@ export const SPEAKERS: Speaker[] = [
     linkedin: 'https://www.linkedin.com/in/subhajit-saha-a9961518/'
   },
   {
-    id: '4',
+    id: '3',
     name: 'Surya Prakash',
     role: 'Lead scrum master',
     companyUrl: 'https://www.wellsfargo.com/',
@@ -62,6 +52,26 @@ export const PANEL_MEMBERS: Speaker[] = [
     image: '/assets/Aditya_Alturi.webp',
     bio: 'Mental wellness AI platform. Expertise: Strategy, Innovation, Entrepreneurship, Startup founder, Venture capital',
     linkedin: ''
+  },
+  {
+    id: 'p2',
+    name: 'Shahar Banu',
+    role: 'Senior DevOps Specialist',
+    company: 'Equisoft',
+    companyUrl: 'https://www.equisoft.com/',
+    image: '/assets/shahar.webp',
+    bio: 'AWS Cloud Engineer and DevOps expert with 12+ years of experience & keynote speaker.',
+    linkedin: 'https://www.linkedin.com/in/shaharbanu/'
+  },
+  {
+    id: 'p3',
+    name: 'Hemanth Reddy',
+    role: 'Founder & CEO',
+    company: 'Ament Capital',
+    companyUrl: 'https://www.amentcapital.com/',
+    image: '/assets/hemanthreddy.jpeg',
+    bio: 'Founder of Ament Capital, a VC firm funding seed & series rounds. CTO at Data Solutions.',
+    linkedin: 'https://www.linkedin.com/in/hemanth-reddy-guntaka/'
   }
 ];
 

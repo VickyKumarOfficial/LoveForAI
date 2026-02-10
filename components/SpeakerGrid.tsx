@@ -28,15 +28,10 @@ export const SpeakerGrid: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row items-end justify-between mb-16 gap-4"
+          className="text-center mb-16"
         >
-          <div>
-            <span className="text-brand-crimson font-bold uppercase tracking-widest text-sm mb-2 block">Our Speakers</span>
-            <h2 className="text-5xl font-display font-bold">Visionary Minds</h2>
-          </div>
-          <p className="text-white/40 max-w-sm text-sm italic">
-            "We aren't just building tools; we're crafting the future of interaction."
-          </p>
+          <span className="text-brand-crimson font-bold uppercase tracking-widest text-sm mb-2 block">Our Speakers</span>
+          <h2 className="text-5xl font-display font-bold">Visionary Minds</h2>
         </motion.div>
 
         <motion.div 
@@ -44,7 +39,7 @@ export const SpeakerGrid: React.FC = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
         >
           {SPEAKERS.map((speaker) => (
             <motion.div key={speaker.id} variants={item} className="group relative">
@@ -106,8 +101,8 @@ export const SpeakerGrid: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="mt-20 text-center"
         >
-          <span className="text-brand-crimson font-bold uppercase tracking-widest text-sm mb-2 block">Panel Member</span>
-          <h2 className="text-4xl font-display font-bold mb-12">Industry Expert</h2>
+          <span className="text-brand-crimson font-bold uppercase tracking-widest text-sm mb-2 block">Panel Members</span>
+          <h2 className="text-4xl font-display font-bold mb-12">Industry Experts</h2>
         </motion.div>
 
         <motion.div 
@@ -115,10 +110,10 @@ export const SpeakerGrid: React.FC = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="flex justify-center"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
         >
           {PANEL_MEMBERS.map((member) => (
-            <motion.div key={member.id} variants={item} className="group relative max-w-xs">
+            <motion.div key={member.id} variants={item} className="group relative">
               <div className="relative aspect-[3/4] overflow-hidden rounded-2xl mb-4 bg-white/5 grayscale group-hover:grayscale-0 transition-all duration-500">
                 <img 
                   src={member.image} 
