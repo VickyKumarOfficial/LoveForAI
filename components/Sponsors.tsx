@@ -37,6 +37,18 @@ const sponsorLogos = [
     alt: "Cognalis", 
     href: "https://cognalissolutions.com/",
     title: "Cognalis"
+  },
+  { 
+    src: "/assets/vishal.jpeg", 
+    alt: "Vishal Peripherals", 
+    href: "https://vishalperipherals.com/?srsltid=AfmBOopoFUpWwANuEmCMJ6xCRFg4HShkC6_MYNfprScBu3OtIFtxe5xV",
+    title: "Vishal Peripherals"
+  },
+  { 
+    src: "/assets/sifarish.jpeg", 
+    alt: "Sifarish", 
+    href: "https://www.mysifarish.com/",
+    title: "Sifarish"
   }
 ];
 
