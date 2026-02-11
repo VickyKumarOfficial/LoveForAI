@@ -1,22 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Pricing plans configuration - Free plan commented out for production
+// Pricing plans configuration - Free plan for cultural events
 const plans = [
-  // {
-  //   title: "Early Bird",
-  //   price: "Free",
-  //   description: "Limited slots available",
-  //   features: [
-  //     "Full conference access",
-  //     "Access to all keynotes & panels",
-  //     "Networking opportunities",
-  //     "Event swag & materials",
-  //     "Lunch & refreshments included",
-  //   ],
-  //   icon: "⚡",
-  //   popular: false,
-  // },
+  {
+    title: "Free - Cultural Event",
+    price: "Free",
+    description: "Free access to cultural events only",
+    features: [
+      "Access to cultural events",
+      "Access to stalls",
+      "Event swag & materials",
+      "Networking opportunities",
+      "No technical event access",
+    ],
+    icon: "🎭",
+    popular: false,
+  },
   {
     title: "Standard Pass",
     price: "₹499",
@@ -94,7 +94,7 @@ export const Pricing: React.FC = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
         >
           {plans.map((plan) => (
             <motion.div

@@ -8,16 +8,20 @@ import { CustomCursor } from '../components/CustomCursor';
 import { SmoothScroll } from '../components/SmoothScroll';
 
 const plans = [
-  // {
-  //   title: "Basic Pass",
-  //   price: "Free",
-  //   description: "Limited accessibility",
-  //   features: [
-  //     "Access to stalls",
-  //   ],
-  //   icon: "",
-  //   popular: false,
-  // },
+  {
+    title: "Free - Cultural Event",
+    price: "Free",
+    description: "Free access to cultural events only",
+    features: [
+      "Access to cultural events",
+      "Access to stalls",
+      "Event swag & materials",
+      "Networking opportunities",
+      "No technical event access",
+    ],
+    icon: "🎭",
+    popular: false,
+  },
   {
     title: "Standard Pass",
     price: "₹99",
@@ -452,7 +456,7 @@ const PricingPage = () => {
                 },
               },
             }}
-            className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
           >
             {plans.map((plan, index) => (
               <motion.div
