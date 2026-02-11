@@ -9,20 +9,6 @@ import { SmoothScroll } from '../components/SmoothScroll';
 
 const plans = [
   {
-    title: "Free - Cultural Event",
-    price: "Free",
-    description: "Free access to cultural events only",
-    features: [
-      "Access to cultural events",
-      "Access to stalls",
-      "Event swag & materials",
-      "Networking opportunities",
-      "No technical event access",
-    ],
-    icon: "🎭",
-    popular: false,
-  },
-  {
     title: "Standard Pass",
     price: "₹99",
     description: "Best value for day 1 or 2 pass only",
