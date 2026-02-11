@@ -110,7 +110,7 @@ export const SpeakerGrid: React.FC = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto"
         >
           {PANEL_MEMBERS.map((member) => (
             <motion.div key={member.id} variants={item} className="group relative">

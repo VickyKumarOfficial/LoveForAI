@@ -102,11 +102,6 @@ const CULTURAL_COMMITTEE: CommitteeMember[] = [
     image: '/assets/committee/Ritesh.webp',
   },
   {
-    name: 'Srivali',
-    role: 'Movie / Films',
-    image: portrait('Srivali'),
-  },
-  {
     name: 'Sahasra',
     role: 'Event Management',
     image: portrait('Sahasra'),

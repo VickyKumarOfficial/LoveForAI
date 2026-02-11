@@ -72,6 +72,16 @@ export const PANEL_MEMBERS: Speaker[] = [
     image: '/assets/hemanthreddy.jpeg',
     bio: 'Founder of Ament Capital, a VC firm funding seed & series rounds. CTO at Data Solutions.',
     linkedin: 'https://www.linkedin.com/in/hemanth-reddy-guntaka/'
+  },
+  {
+    id: 'p4',
+    name: 'Ranjith Raj Vasam',
+    role: 'Platform Eng',
+    company: 'Nokia',
+    companyUrl: 'https://www.nokia.com/',
+    image: '/assets/ranjith.webp',
+    bio: 'Platform Engineer - AI & Cloud Native Solutions, Ex - Fiserv & Ex - IBM',
+    linkedin: 'https://www.linkedin.com/in/ranjithrajv/'
   }
 ];
 
