@@ -37,6 +37,12 @@ const sponsorLogos = [
     alt: "Cognalis", 
     href: "https://cognalissolutions.com/",
     title: "Cognalis"
+  },
+  { 
+    src: "/assets/beingzero.jpeg", 
+    alt: "BeingZero", 
+    href: "https://beingzero.in/",
+    title: "BeingZero"
   }
 ];
 

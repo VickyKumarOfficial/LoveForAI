@@ -5,7 +5,9 @@ export const DeviceIntro = ({ children }: { children: React.ReactNode }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isComplete, setIsComplete] = useState(() => {
     if (typeof window !== 'undefined') {
-      return window.innerWidth < 1024; // Skip intro for widths less than 1024px
+      // Skip intro if already seen this session OR if screen is small
+      if (window.innerWidth < 1024) return true;
+      return sessionStorage.getItem('deviceIntroComplete') === 'true';
     }
     return false;
   });
@@ -13,6 +15,7 @@ export const DeviceIntro = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 1024 && !isComplete) {
+        sessionStorage.setItem('deviceIntroComplete', 'true');
         setIsComplete(true);
       }
     };
@@ -46,6 +49,7 @@ export const DeviceIntro = ({ children }: { children: React.ReactNode }) => {
         onHoverStart={() => setIsHovered(true)}
         onAnimationComplete={() => {
           if (isHovered) {
+             sessionStorage.setItem('deviceIntroComplete', 'true');
              setIsComplete(true);
           }
         }}

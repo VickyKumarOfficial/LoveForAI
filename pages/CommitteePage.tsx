@@ -26,17 +26,17 @@ const TECHNICAL_COMMITTEE: CommitteeMember[] = [
   },
   {
     name: 'Varun',
-    role: 'Sponsers',
+    role: 'Sponsors',
     image: '/assets/committee/varun.webp',
   },
   {
     name: 'Varshitha',
-    role: 'Sponsers ',
+    role: 'Sponsors ',
     image: portrait('Varshitha'),
   },
   {
     name: 'Ananya',
-    role: 'Sponsers',
+    role: 'Sponsors',
     image: '/assets/committee/Ananya.webp',
   },
   // {

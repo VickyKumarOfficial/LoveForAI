@@ -6,6 +6,7 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { CustomCursor } from '../components/CustomCursor';
 import { SmoothScroll } from '../components/SmoothScroll';
+import PhoneOTPButton from '../components/PhoneOTPButton';
 
 const plans = [
   {
@@ -42,7 +43,7 @@ const plans = [
 
 const PricingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [paymentStep, setPaymentStep] = useState<'details' | 'payment'>('details');
+  const [paymentStep, setPaymentStep] = useState<'details' | 'otp' | 'payment'>('details');
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -51,6 +52,8 @@ const PricingPage = () => {
   const [screenshotPreview, setScreenshotPreview] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState('');
   const [utrError, setUtrError] = useState('');
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
+  const [verifiedPhoneData, setVerifiedPhoneData] = useState<{ jsonUrl: string; phone: string; countryCode: string } | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -67,8 +70,18 @@ const PricingPage = () => {
     setFormData(prev => ({ ...prev, transactionId: '', selectedDay: '' }));
     setScreenshotFile(null);
     setScreenshotPreview(null);
+    setIsPhoneVerified(false);
+    setVerifiedPhoneData(null);
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden';
+  };
+
+  // Handle OTP verification success
+  const handlePhoneVerificationSuccess = (jsonUrl: string, phone: string, countryCode: string) => {
+    setIsPhoneVerified(true);
+    setVerifiedPhoneData({ jsonUrl, phone, countryCode });
+    // Automatically proceed to payment step after verification
+    setPaymentStep('payment');
   };
 
   const handleScreenshotChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -184,7 +197,7 @@ const PricingPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // If it's a paid plan and we are still in details step, move to payment step
+    // If it's a paid plan and we are still in details step, move to OTP verification step
     if (selectedPlan.price !== 'Free' && paymentStep === 'details') {
       // Validate day selection for Standard Pass
       if (selectedPlan.title === 'Standard Pass' && !formData.selectedDay) {
@@ -192,7 +205,20 @@ const PricingPage = () => {
         setTimeout(() => setErrorMessage(''), 5000);
         return;
       }
-      setPaymentStep('payment');
+      // Validate phone number before moving to OTP step
+      const phoneErr = validatePhone(formData.phone);
+      if (phoneErr) {
+        setPhoneError(phoneErr);
+        setErrorMessage(phoneErr);
+        setTimeout(() => setErrorMessage(''), 5000);
+        return;
+      }
+      setPaymentStep('otp');
+      return;
+    }
+
+    // If in OTP step, don't submit - OTP verification will handle the transition
+    if (paymentStep === 'otp') {
       return;
     }
 
@@ -969,6 +995,45 @@ const PricingPage = () => {
                       </div>
                     )}
                   </>
+                ) : paymentStep === 'otp' ? (
+                  /* OTP Verification Step */
+                  <div className="space-y-6">
+                    <div className="text-center mb-6">
+                      <div className="w-16 h-16 bg-brand-crimson/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg className="w-8 h-8 text-brand-crimson" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-2">Verify Your Phone Number</h3>
+                      <p className="text-zinc-400 text-sm">
+                        Please verify your phone number to continue with the registration
+                      </p>
+                    </div>
+
+                    <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
+                      <PhoneOTPButton 
+                        phoneNumber={formData.phone}
+                        onVerificationSuccess={handlePhoneVerificationSuccess}
+                      />
+                    </div>
+
+                    {isPhoneVerified && (
+                      <div className="flex items-center justify-center gap-2 text-green-400 bg-green-400/10 p-3 rounded-xl">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                        <span className="font-semibold">Phone number verified successfully!</span>
+                      </div>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={() => setPaymentStep('details')}
+                      className="w-full py-2 text-zinc-400 hover:text-white transition-colors text-sm"
+                    >
+                      ← Back to details
+                    </button>
+                  </div>
                 ) : (
                   <div className="space-y-6 text-center">
                     <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
@@ -1087,6 +1152,8 @@ const PricingPage = () => {
                     type="button"
                     onClick={() => {
                       if (paymentStep === 'payment') {
+                        setPaymentStep('otp');
+                      } else if (paymentStep === 'otp') {
                         setPaymentStep('details');
                       } else {
                         closeModal();
@@ -1095,27 +1162,29 @@ const PricingPage = () => {
                     disabled={isLoading}
                     className="flex-1 py-3 px-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl font-bold uppercase tracking-wider text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {paymentStep === 'payment' ? 'Back' : 'Cancel'}
+                    {paymentStep === 'payment' || paymentStep === 'otp' ? 'Back' : 'Cancel'}
                   </button>
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="flex-1 py-3 px-6 bg-brand-crimson hover:bg-brand-crimson/90 rounded-xl font-bold uppercase tracking-wider text-sm transition-all shadow-lg shadow-brand-crimson/30 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  >
-                    {isLoading ? (
-                      <>
-                        <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Processing...
-                      </>
-                    ) : (
-                      selectedPlan?.price === 'Free' 
-                        ? 'Complete Registration' 
-                        : (paymentStep === 'details' ? 'Proceed to Payment' : 'Confirm Payment')
-                    )}
-                  </button>
+                  {paymentStep !== 'otp' && (
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="flex-1 py-3 px-6 bg-brand-crimson hover:bg-brand-crimson/90 rounded-xl font-bold uppercase tracking-wider text-sm transition-all shadow-lg shadow-brand-crimson/30 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      {isLoading ? (
+                        <>
+                          <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Processing...
+                        </>
+                      ) : (
+                        selectedPlan?.price === 'Free' 
+                          ? 'Complete Registration' 
+                          : (paymentStep === 'details' ? 'Verify Phone' : 'Confirm Payment')
+                      )}
+                    </button>
+                  )}
                 </div>
               </form>
               </div>

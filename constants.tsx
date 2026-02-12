@@ -39,6 +39,16 @@ export const SPEAKERS: Speaker[] = [
     image: '/assets/suryaprakash.webp',
     bio: 'An well experienced in the Software Eng. and Automation field',
     linkedin: 'https://www.linkedin.com/in/suryaprakash-i-34305921?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+  },
+  {
+    id: '4',
+    name: 'Mohammed Faiz Ahmed',
+    role: 'Co-Founder',
+    company: 'Dendrites',
+    companyUrl: 'https://www.dendrites.ai/',
+    image: '/assets/faiz.webp',
+    bio: 'Building commerce-grade crypto payments with predictable fees, reversible transactions, & for Web3.',
+    linkedin: ''
   }
 ];
 
