@@ -43,7 +43,7 @@ export const SPEAKERS: Speaker[] = [
   {
     id: '4',
     name: 'Mohammed Faiz Ahmed',
-    role: 'Co-Founder',
+    role: 'Founder',
     company: 'Dendrites',
     companyUrl: 'https://www.dendrites.ai/',
     image: '/assets/faiz.webp',

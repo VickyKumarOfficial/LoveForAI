@@ -613,14 +613,11 @@ const PricingPage = () => {
                   </li>
                 </ul>
 
-                <a
-                  href="https://forms.gle/VVjWrrmdUJN8kZBy6"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto w-full py-4 px-6 rounded-xl font-bold uppercase tracking-wider text-sm transition-all duration-300 bg-brand-crimson text-white hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/30 text-center"
+                <div
+                  className="mt-auto w-full py-4 px-6 rounded-xl font-bold uppercase tracking-wider text-sm bg-zinc-700 text-zinc-400 cursor-not-allowed text-center"
                 >
-                  Register Now
-                </a>
+                  Registration Closed
+                </div>
               </motion.div>
 
               {/* Battleground Blitz */}
