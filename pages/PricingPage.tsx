@@ -362,7 +362,7 @@ const PricingPage = () => {
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-crimson/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-br from-brand-crimson/20 via-transparent to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
